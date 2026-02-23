@@ -21,7 +21,7 @@ import openai
 import backoff
 
 from garak import _config
-from garak.attempt import Message, Conversation, Turn
+from garak.attempt import Message, Conversation
 import garak.exception
 from garak.generators.base import Generator
 
@@ -127,6 +127,9 @@ context_lengths = {
     "o1-preview-2024-09-12": 32768,
 }
 
+audio_formats = ["wav", "mp3"]
+audio_pattern = re.compile("|".join(audio_formats))
+
 
 class OpenAICompatible(Generator):
     """Generator base class for OpenAI compatible text2text restful API. Implements shared initialization and execution methods."""
@@ -186,20 +189,22 @@ class OpenAICompatible(Generator):
 
         super().__init__(self.name, config_root=config_root)
 
-    def _conversation_to_list(self, conversation: Conversation) -> list[dict]:
+    @staticmethod
+    def _conversation_to_list(conversation: Conversation) -> list[dict]:
         """Convert Conversation object to a list of dicts.
 
         Overriding this method for OpenAICompatible to support multimodal:
         https://developers.openai.com/api/docs/guides/images-vision/?format=base64-encoded#analyze-images
         """
+
         turn_list = []
         for turn in conversation.turns:
-            if turn.content.data is not None and hasattr(turn, "data_type"):
+            if turn.content.data is not None and hasattr(turn.content, "data_type"):
                 import base64
 
                 data_b64 = base64.b64encode(turn.content.data).decode("utf-8")
 
-                if "image" in turn.data_type:
+                if "image" in turn.content.data_type:
                     transformed_turn = {
                         "role": turn.role,
                         "content": [
@@ -210,7 +215,9 @@ class OpenAICompatible(Generator):
                             },
                         ],
                     }
-                elif turn.data_type.split("/")[-1] in ["wav", "mp3"]:
+                elif match := audio_pattern.search(
+                    turn.content.data_type[0].split("/")[-1]
+                ):
                     transformed_turn = {
                         "role": turn.role,
                         "content": [
@@ -219,7 +226,7 @@ class OpenAICompatible(Generator):
                                 "type": "input_audio",
                                 "input_audio": {
                                     "data": f"{data_b64}",
-                                    "format": turn.data_type[0].split("/")[-1],
+                                    "format": match.group(0),
                                 },
                             },
                         ],

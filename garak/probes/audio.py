@@ -84,7 +84,7 @@ class AudioAchillesHeel(garak.probes.Probe):
 
         filenames = [
             str(filename.resolve())
-            for filename in audio_achilles_data_dir.glob("*.*")
+            for filename in audio_achilles_data_dir.glob("*")
             if filename.is_file()
         ]
         return filenames
