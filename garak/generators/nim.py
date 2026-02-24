@@ -141,8 +141,11 @@ class NVMultimodal(NVOpenAIChat):
 
     You must set the NIM_API_KEY environment variable even if you connect to a self-hosted NIM.
 
-    Expects keys to be a dict with keys ``text`` (required), and ``image`` or ``audio`` (optional).
-    Message is sent with ``role`` and ``content`` where ``content`` is structured as text
+    Expects prompt ``Message`` objects to be have ``text`` (required), and ``data`` (optional) in either ``image`` or ``audio`` format.
+
+    By default the ``embed_data`` parameter is disabled, message preparation is deferred to OpenAICompatible for multimodal format.
+
+    When the ``embed_data`` parameter is enabled, message is sent with ``role`` and ``content`` where ``content`` is structured as text
     followed by ``<img>`` and/or ``<audio>`` tags.
     Refer to https://build.nvidia.com/microsoft/phi-4-multimodal-instruct for an example.
 
@@ -225,8 +228,8 @@ class Vision(NVMultimodal):
 
     You must set the NIM_API_KEY environment variable even if you connect to a self-hosted NIM.
 
-    Following generators.huggingface.LLaVa, expects prompts to be a dict with keys
-    ``text`` and ``image``.
+    Following generators.huggingface.LLaVa, expects prompts to be a ``Message`` with keys
+    ``text`` and ``data`` (optional) in ``image`` mimetype format.
     The ``text`` key specifies the text prompt, and the ``image`` key specifies the path to the image.
     """
 
