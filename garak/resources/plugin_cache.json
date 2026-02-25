@@ -194,7 +194,7 @@
         "quality:Security:PromptStability"
       ],
       "tier": 9,
-      "mod_time": "2025-11-13 14:31:01 +0000"
+      "mod_time": "2026-02-23 15:55:30 +0000"
     },
     "probes.av_spam_scanning.EICAR": {
       "description": "Does the model check its output for viruses? Try to send the EICAR code through",
@@ -8418,7 +8418,8 @@
         "extra_params": {},
         "vary_seed_each_call": true,
         "vary_temp_each_call": true,
-        "max_input_len": 180000
+        "max_input_len": 180000,
+        "embed_data": false
       },
       "active": true,
       "extra_dependency_names": [],
@@ -8435,7 +8436,7 @@
       },
       "parallel_capable": true,
       "supports_multiple_generations": false,
-      "mod_time": "2026-01-09 14:20:03 +0000"
+      "mod_time": "2026-02-24 19:51:44 +0000"
     },
     "generators.nim.NVOpenAIChat": {
       "description": "Wrapper for NVIDIA NIM microservices hosted on build.nvidia.com and self-hosted.",
@@ -8479,7 +8480,7 @@
       },
       "parallel_capable": true,
       "supports_multiple_generations": false,
-      "mod_time": "2026-01-09 14:20:03 +0000"
+      "mod_time": "2026-02-24 19:51:44 +0000"
     },
     "generators.nim.NVOpenAICompletion": {
       "description": "Wrapper for NVIDIA NIM microservices hosted on build.nvidia.com and self-hosted.",
@@ -8523,7 +8524,7 @@
       },
       "parallel_capable": true,
       "supports_multiple_generations": false,
-      "mod_time": "2026-01-09 14:20:03 +0000"
+      "mod_time": "2026-02-24 19:51:44 +0000"
     },
     "generators.nim.Vision": {
       "description": "Wrapper for text and image to text NVIDIA NIM microservices hosted on build.nvidia.com and self-hosted.",
@@ -8553,7 +8554,8 @@
         "extra_params": {},
         "vary_seed_each_call": true,
         "vary_temp_each_call": true,
-        "max_input_len": 180000
+        "max_input_len": 180000,
+        "embed_data": false
       },
       "active": true,
       "extra_dependency_names": [],
@@ -8569,7 +8571,7 @@
       },
       "parallel_capable": true,
       "supports_multiple_generations": false,
-      "mod_time": "2026-01-09 14:20:03 +0000"
+      "mod_time": "2026-02-24 19:51:44 +0000"
     },
     "generators.nvcf.NvcfChat": {
       "description": "Wrapper for NVIDIA Cloud Functions Chat models via NGC. Expects NVCF_API_KEY environment variable.",
@@ -8732,7 +8734,7 @@
       },
       "parallel_capable": true,
       "supports_multiple_generations": false,
-      "mod_time": "2026-01-20 17:25:39 +0000"
+      "mod_time": "2026-02-18 22:29:32 +0000"
     },
     "generators.openai.OpenAIGenerator": {
       "description": "Generator wrapper for OpenAI text2text models. Expects API key in the OPENAI_API_KEY environment variable",
@@ -8768,7 +8770,7 @@
       },
       "parallel_capable": true,
       "supports_multiple_generations": true,
-      "mod_time": "2026-01-20 17:25:39 +0000"
+      "mod_time": "2026-02-18 22:29:32 +0000"
     },
     "generators.openai.OpenAIReasoningGenerator": {
       "description": "Generator wrapper for OpenAI reasoning models, e.g. `o1` family.",
@@ -8809,7 +8811,7 @@
       },
       "parallel_capable": true,
       "supports_multiple_generations": false,
-      "mod_time": "2026-01-20 17:25:39 +0000"
+      "mod_time": "2026-02-18 22:29:32 +0000"
     },
     "generators.rasa.RasaRestGenerator": {
       "description": "API interface for RASA models",
